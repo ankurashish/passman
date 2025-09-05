@@ -1,22 +1,33 @@
-import React from "react";
-import { useRef,useState } from "react";
+import React, { useEffect } from "react";
+import { useRef, useState } from "react";
 
 const Manager = () => {
   const ref = useRef();
-  const [form, setform] = useState({site:"", username:"", password:""});
+  const [form, setform] = useState({ site: "", username: "", password: "" });
+  const [passwordArray, setpasswordArray] = useState([]);
+
+  useEffect(() => {
+    let passwords = localStorage.getItem("passwords");
+    
+    if (passwords) {
+      passwordArray = JSON.parse(passwords);
+    }//else {
+    //   passwordArray = [];
+    // }
+  }, []);
 
   const savePassword = () => {
-    alert("Password Saved");
+    // alert("Password Saved");
+    console.log(form);
   };
   const handleChange = (e) => {
-    setform({...form, [e.target.name]: e.target.value});
+    setform({ ...form, [e.target.name]: e.target.value });
   };
   const showPassword = () => {
     // alert("show password");
     if (ref.current.src.includes("icons/eyecross.svg")) {
       ref.current.src = "icons/eye.svg";
-    }
-    else {
+    } else {
       ref.current.src = "icons/eyecross.svg";
     }
   };
@@ -40,7 +51,7 @@ const Manager = () => {
               onChange={handleChange}
               placeholder="Enter Website URL"
               type="text"
-              name=""
+              name="site"
               id=""
               className="bg-gray-200 text-black rounded-2xl px-2 py-1 mb-2 w-full"
             />
@@ -50,6 +61,7 @@ const Manager = () => {
                 onChange={handleChange}
                 placeholder="Enter Username"
                 type="text"
+                name="username"
                 className="bg-gray-200 text-black rounded-2xl px-2 py-1 mr-2 flex-grow "
               />
               <div className="relative">
@@ -58,6 +70,7 @@ const Manager = () => {
                   onChange={handleChange}
                   placeholder="Enter Password"
                   type="text"
+                  name="password"
                   className="bg-gray-200 text-black rounded-2xl px-2 py-1 flex-grow min-w-[40%] pr-8"
                 />
                 <span
