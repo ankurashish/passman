@@ -8,10 +8,10 @@ const Manager = () => {
 
   useEffect(() => {
     let passwords = localStorage.getItem("passwords");
-    
+
     if (passwords) {
-      passwordArray = JSON.parse(passwords);
-    }//else {
+      setpasswordArray(JSON.parse(passwords));
+    } //else {
     //   passwordArray = [];
     // }
   }, []);
@@ -19,6 +19,9 @@ const Manager = () => {
   const savePassword = () => {
     // alert("Password Saved");
     console.log(form);
+    setpasswordArray([...passwordArray, form]);
+    localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]));
+    console.log([...passwordArray, form]);
   };
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
@@ -112,6 +115,30 @@ const Manager = () => {
             </svg>
             Add Password
           </button>
+        </div>
+        <div className="passwords">
+          <h2 className="font-bold text-xl py-4">Your Passwords</h2>
+          {passwordArray.length === 0 && <div>No Passwords Saved</div>}
+          {passwordArray.length > 0 && (
+            <table className="table-auto w-full text-left whitespace-no-wrap overflow-hidden rounded-lg bg-gray-200 shadow-lg ">
+              <thead className="bg-gray-300 text-black font-bold  ">
+                <tr>
+                  <th>Website</th>
+                  <th>Username</th>
+                  <th>Password</th>
+                </tr>
+              </thead>
+              <tbody>
+                {passwordArray.map((item, index) => (
+                  <tr key={index}>
+                    <td><a href={item.site} target="_blank" >{item.site}</a></td>
+                    <td>{item.username}</td>
+                    <td>{item.password}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
