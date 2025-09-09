@@ -3,14 +3,14 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav className="bg-blue-500 px-4 text-white flex justify-between items-center h-12">
-      <div className="mycontainer">
-        <div className="logo font-bold text-white">
+      <div className="mycontainer flex flex-row justify-between items-center">
+        <div className="logo font-bold text-white text-2xl flex items-center">
           <span>&lt;</span>
           PassMan
           <span>/&gt;</span>
         </div>
-        <ul>
-          <li>
+        {/* <ul>
+          <li className="flex gap-4">
             <a className="hover:font-bold" href="/">
               Home
             </a>
@@ -21,7 +21,11 @@ const Navbar = () => {
               Contact
             </a>
           </li>
-        </ul>
+        </ul> */}
+        <button className="github text-black hover:scale-105 hover:transition-all rounded-md flex items-center bg-gray-50 px-1 cursor-pointer">
+          <img className="w-9 " src="icons/github.svg" alt="GitHub" />
+          <span className="font-bold px-2">GitHub</span>
+        </button>
       </div>
     </nav>
   );

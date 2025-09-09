@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 
 const Manager = () => {
   const ref = useRef();
+  const passwordRef = useRef();
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setpasswordArray] = useState([]);
 
@@ -28,17 +29,20 @@ const Manager = () => {
   };
   const showPassword = () => {
     // alert("show password");
+    // passwordRef.current.type ="text";
     if (ref.current.src.includes("icons/eyecross.svg")) {
       ref.current.src = "icons/eye.svg";
+      passwordRef.current.type = "password";
     } else {
       ref.current.src = "icons/eyecross.svg";
+      passwordRef.current.type = "text";
     }
   };
 
   return (
     <>
       <div class="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
-      <div className="mycontainer bg-slate-100 rounded-3xl shadow-lg flex flex-col p-4 mt-4">
+      <div className="mycontainer bg-slate-100 rounded-3xl shadow-lg flex flex-col p-4 mt-4 ">
         <h1 className="text-4xl font-bold text-center">
           <span>&lt;</span>
           PassMan
@@ -69,10 +73,11 @@ const Manager = () => {
               />
               <div className="relative">
                 <input
+                  ref={passwordRef}
                   value={form.password}
                   onChange={handleChange}
                   placeholder="Enter Password"
-                  type="text"
+                  type="password"
                   name="password"
                   className="bg-gray-200 text-black rounded-2xl px-2 py-1 flex-grow min-w-[40%] pr-8"
                 />
@@ -87,7 +92,7 @@ const Manager = () => {
           </div>
           <button
             onClick={savePassword}
-            className="flex justify-center items-center bg-green-500 hover:bg-green-400 rounded-full px-2 py-2 w-fit mt-2 gap-2
+            className="flex justify-center items-center bg-green-500 hover:bg-green-400 hover:scale-102 hover:transition-all rounded-full px-2 py-2 w-fit mt-2 gap-2 cursor-pointer
           "
           >
             <svg
@@ -116,8 +121,8 @@ const Manager = () => {
             Add Password
           </button>
         </div>
-        <div className="passwords">
           <h2 className="font-bold text-xl py-4">Your Passwords</h2>
+        <div className="passwords max-h-[calc(100vh-420px)] overflow-y-auto">
           {passwordArray.length === 0 && <div>No Passwords Saved</div>}
           {passwordArray.length > 0 && (
             <table className="table-auto w-full text-left whitespace-no-wrap overflow-hidden rounded-lg bg-gray-200 shadow-lg ">
@@ -131,7 +136,36 @@ const Manager = () => {
               <tbody>
                 {passwordArray.map((item, index) => (
                   <tr key={index}>
-                    <td><a href={item.site} target="_blank" >{item.site}</a></td>
+                    <td className="flex items-center justify-between gap-2">
+                      <a href={item.site} target="_blank">
+                        {item.site}
+                      </a>
+                      <svg 
+                        className="cursor-pointer hover:scale-105 hover:transition-all mx-2 my-1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        width="24"
+                        height="24"
+                        color="#000000"
+                        fill="none"
+                      >
+                        <path
+                          d="M9 15C9 12.1716 9 10.7574 9.87868 9.87868C10.7574 9 12.1716 9 15 9L16 9C18.8284 9 20.2426 9 21.1213 9.87868C22 10.7574 22 12.1716 22 15V16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15C12.1716 22 10.7574 22 9.87868 21.1213C9 20.2426 9 18.8284 9 16L9 15Z"
+                          stroke="#141B34"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M16.9999 9C16.9975 6.04291 16.9528 4.51121 16.092 3.46243C15.9258 3.25989 15.7401 3.07418 15.5376 2.90796C14.4312 2 12.7875 2 9.5 2C6.21252 2 4.56878 2 3.46243 2.90796C3.25989 3.07417 3.07418 3.25989 2.90796 3.46243C2 4.56878 2 6.21252 2 9.5C2 12.7875 2 14.4312 2.90796 15.5376C3.07417 15.7401 3.25989 15.9258 3.46243 16.092C4.51121 16.9528 6.04291 16.9975 9 16.9999"
+                          stroke="#141B34"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </td>
+
                     <td>{item.username}</td>
                     <td>{item.password}</td>
                   </tr>
