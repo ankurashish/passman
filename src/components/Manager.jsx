@@ -92,7 +92,7 @@ const Manager = () => {
           </div>
           <button
             onClick={savePassword}
-            className="flex justify-center items-center bg-green-500 hover:bg-green-400 hover:scale-102 hover:transition-all rounded-full px-2 py-2 w-fit mt-2 gap-2 cursor-pointer
+            className="flex justify-center items-center bg-green-500 hover:bg-green-450 hover:scale-102 hover:transition-all rounded-full px-2 py-2 w-fit mt-2 gap-2 cursor-pointer
           "
           >
             <svg
