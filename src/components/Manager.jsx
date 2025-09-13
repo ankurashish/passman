@@ -121,7 +121,7 @@ const Manager = () => {
             Add Password
           </button>
         </div>
-          <h2 className="font-bold text-xl py-4">Your Passwords</h2>
+        <h2 className="font-bold text-xl py-4">Your Passwords</h2>
         <div className="passwords max-h-[calc(100vh-420px)] overflow-y-auto">
           {passwordArray.length === 0 && <div>No Passwords Saved</div>}
           {passwordArray.length > 0 && (
@@ -136,38 +136,106 @@ const Manager = () => {
               <tbody>
                 {passwordArray.map((item, index) => (
                   <tr key={index}>
-                    <td className="flex items-center justify-between gap-2">
-                      <a href={item.site} target="_blank">
-                        {item.site}
-                      </a>
-                      <svg 
-                        className="cursor-pointer hover:scale-105 hover:transition-all mx-2 my-1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        width="24"
-                        height="24"
-                        color="#000000"
-                        fill="none"
-                      >
-                        <path
-                          d="M9 15C9 12.1716 9 10.7574 9.87868 9.87868C10.7574 9 12.1716 9 15 9L16 9C18.8284 9 20.2426 9 21.1213 9.87868C22 10.7574 22 12.1716 22 15V16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15C12.1716 22 10.7574 22 9.87868 21.1213C9 20.2426 9 18.8284 9 16L9 15Z"
-                          stroke="#141B34"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                        <path
-                          d="M16.9999 9C16.9975 6.04291 16.9528 4.51121 16.092 3.46243C15.9258 3.25989 15.7401 3.07418 15.5376 2.90796C14.4312 2 12.7875 2 9.5 2C6.21252 2 4.56878 2 3.46243 2.90796C3.25989 3.07417 3.07418 3.25989 2.90796 3.46243C2 4.56878 2 6.21252 2 9.5C2 12.7875 2 14.4312 2.90796 15.5376C3.07417 15.7401 3.25989 15.9258 3.46243 16.092C4.51121 16.9528 6.04291 16.9975 9 16.9999"
-                          stroke="#141B34"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
+                    {/* Website */}
+                    <td>
+                      <div className="flex items-center justify-between gap-2">
+                        <a href={item.site} target="_blank" rel="noreferrer">
+                          {item.site}
+                        </a>
+                        <svg
+                          onClick={() =>
+                            navigator.clipboard.writeText(item.site)
+                          }
+                          className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          fill="none"
+                        >
+                          <path
+                            d="M9 15C9 12.17 9 10.76 9.88 9.88C10.76 9 12.17 9 15 9H16C18.83 9 20.24 9 21.12 9.88C22 10.76 22 12.17 22 15V16C22 18.83 22 20.24 21.12 21.12C20.24 22 18.83 22 16 22H15C12.17 22 10.76 22 9.88 21.12C9 20.24 9 18.83 9 16V15Z"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M17 9C16.99 6.04 16.95 4.51 16.09 3.46C15.93 3.26 15.74 3.07 15.54 2.91C14.43 2 12.79 2 9.5 2C6.21 2 4.57 2 3.46 2.91C3.26 3.07 3.07 3.26 2.91 3.46C2 4.57 2 6.21 2 9.5C2 12.79 2 14.43 2.91 15.54C3.07 15.74 3.26 15.93 3.46 16.09C4.51 16.95 6.04 16.99 9 17"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
                     </td>
 
-                    <td>{item.username}</td>
-                    <td>{item.password}</td>
+                    {/* Username */}
+                    <td>
+                      <div className="flex items-center justify-between gap-2">
+                        {item.username}
+                        <svg
+                          onClick={() =>
+                            navigator.clipboard.writeText(item.username)
+                          }
+                          className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          fill="none"
+                        >
+                          <path
+                            d="M9 15C9 12.17 9 10.76 9.88 9.88C10.76 9 12.17 9 15 9H16C18.83 9 20.24 9 21.12 9.88C22 10.76 22 12.17 22 15V16C22 18.83 22 20.24 21.12 21.12C20.24 22 18.83 22 16 22H15C12.17 22 10.76 22 9.88 21.12C9 20.24 9 18.83 9 16V15Z"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M17 9C16.99 6.04 16.95 4.51 16.09 3.46C15.93 3.26 15.74 3.07 15.54 2.91C14.43 2 12.79 2 9.5 2C6.21 2 4.57 2 3.46 2.91C3.26 3.07 3.07 3.26 2.91 3.46C2 4.57 2 6.21 2 9.5C2 12.79 2 14.43 2.91 15.54C3.07 15.74 3.26 15.93 3.46 16.09C4.51 16.95 6.04 16.99 9 17"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </td>
+
+                    {/* Password */}
+                    <td>
+                      <div className="flex items-center justify-between gap-2">
+                        {item.password}
+                        <svg
+                          onClick={() =>
+                            navigator.clipboard.writeText(item.password)
+                          }
+                          className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="20"
+                          height="20"
+                          fill="none"
+                        >
+                          <path
+                            d="M9 15C9 12.17 9 10.76 9.88 9.88C10.76 9 12.17 9 15 9H16C18.83 9 20.24 9 21.12 9.88C22 10.76 22 12.17 22 15V16C22 18.83 22 20.24 21.12 21.12C20.24 22 18.83 22 16 22H15C12.17 22 10.76 22 9.88 21.12C9 20.24 9 18.83 9 16V15Z"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M17 9C16.99 6.04 16.95 4.51 16.09 3.46C15.93 3.26 15.74 3.07 15.54 2.91C14.43 2 12.79 2 9.5 2C6.21 2 4.57 2 3.46 2.91C3.26 3.07 3.07 3.26 2.91 3.46C2 4.57 2 6.21 2 9.5C2 12.79 2 14.43 2.91 15.54C3.07 15.74 3.26 15.93 3.46 16.09C4.51 16.95 6.04 16.99 9 17"
+                            stroke="#141B34"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
