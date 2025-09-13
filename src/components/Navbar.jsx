@@ -22,7 +22,7 @@ const Navbar = () => {
             </a>
           </li>
         </ul> */}
-        <button className="github text-black hover:scale-105 hover:transition-all rounded-md flex items-center bg-gray-50 px-1 cursor-pointer">
+        <button className="github text-black hover:scale-105 hover:transition-all rounded-md flex items-center bg-gray-50 px-1 cursor-pointer ring-black ring-1">
           <img className="w-9 " src="icons/github.svg" alt="GitHub" />
           <span className="font-bold px-2">GitHub</span>
         </button>
