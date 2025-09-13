@@ -158,6 +158,7 @@ const Manager = () => {
                   <th>Website</th>
                   <th>Username</th>
                   <th>Password</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -263,6 +264,12 @@ const Manager = () => {
                         </svg>
                       </div>
                     </td>
+                    <td>
+                      <div className="flex items-center justify-between gap-2">
+                        <button><span>Delete</span></button>
+                      </div>
+                    </td>
+                    
                   </tr>
                 ))}
               </tbody>
