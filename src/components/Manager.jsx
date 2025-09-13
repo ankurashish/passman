@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
+// import React from "react";
+
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 const Manager = () => {
   const ref = useRef();
@@ -18,6 +21,17 @@ const Manager = () => {
   }, []);
 
   const savePassword = () => {
+    toast.success("🦄 Password Saved!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
     // alert("Password Saved");
     console.log(form);
     setpasswordArray([...passwordArray, form]);
@@ -41,6 +55,19 @@ const Manager = () => {
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div class="absolute inset-0 -z-10 h-full w-full bg-white [background:radial-gradient(125%_125%_at_50%_10%,#fff_40%,#63e_100%)]"></div>
       <div className="mycontainer bg-slate-100 rounded-3xl shadow-lg flex flex-col p-4 mt-4 ">
         <h1 className="text-4xl font-bold text-center">
