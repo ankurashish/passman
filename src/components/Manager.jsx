@@ -38,11 +38,32 @@ const Manager = () => {
     setpasswordArray([...passwordArray, {...form, id: uuidv4()}]);
     localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]));
     console.log([...passwordArray, form]);
+    setform({ site: "", username: "", password: "" });
   };
   const deletePassword = (id) => {
-    setpasswordArray([...passwordArray, {...form, id: uuidv4()}]);
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]));
-    console.log([...passwordArray, form]);
+    const con=confirm("Are you sure you want to delete this password?");
+    if(con){
+      
+      setpasswordArray(passwordArray.filter(item => item.id !== id));
+      localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)));
+      console.log([...passwordArray, form]);
+    }
+    toast.success("🦄 Password Deleted!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    
+  }
+  const editPassword = (id) => {
+    setform(passwordArray.find(item => item.id === id));
+    setpasswordArray(passwordArray.filter(item => item.id !== id));
     
   }
   
@@ -277,7 +298,7 @@ const Manager = () => {
                       <div className="flex items-center justify-around gap-2">
                         <span>
                           <svg
-                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all " onClick={()=>editPassword(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
@@ -302,7 +323,7 @@ const Manager = () => {
                         </span>
                         <span>
                           <svg
-                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all" onClick={()=>deletePassword(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
