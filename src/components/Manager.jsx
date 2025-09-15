@@ -35,10 +35,17 @@ const Manager = () => {
     });
     // alert("Password Saved");
     console.log(form);
-    setpasswordArray([...passwordArray, form]);
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]));
+    setpasswordArray([...passwordArray, {...form, id: uuidv4()}]);
+    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]));
     console.log([...passwordArray, form]);
   };
+  const deletePassword = (id) => {
+    setpasswordArray([...passwordArray, {...form, id: uuidv4()}]);
+    localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]));
+    console.log([...passwordArray, form]);
+    
+  }
+  
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
@@ -267,7 +274,7 @@ const Manager = () => {
                     </td>
                     {/* Actions */}
                     <td>
-                      <div className="flex items-center justify-end gap-2">
+                      <div className="flex items-center justify-around gap-2">
                         <span>
                           <svg
                             className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
