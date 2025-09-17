@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRef, useState } from "react";
 // import React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import { ToastContainer, toast, Bounce } from "react-toastify";
 
@@ -22,33 +22,46 @@ const Manager = () => {
   }, []);
 
   const savePassword = () => {
-    toast.success("🦄 Password Saved!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-    // alert("Password Saved");
-    console.log(form);
-    setpasswordArray([...passwordArray, {...form, id: uuidv4()}]);
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]));
-    console.log([...passwordArray, form]);
-    setform({ site: "", username: "", password: "" });
+    if (form.site === "" || form.username === "" || form.password === "") {
+      toast.error("Please fill all the fields", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+      });
+    } else {
+      toast.success("🦄 Password Saved!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      // alert("Password Saved");
+      console.log(form);
+      setpasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+      localStorage.setItem(
+        "passwords",
+        JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+      );
+      console.log([...passwordArray, form]);
+      setform({ site: "", username: "", password: "" });
+    }
   };
   const deletePassword = (id) => {
-    const con=confirm("Are you sure you want to delete this password?");
-    if(con){
-      
-      setpasswordArray(passwordArray.filter(item => item.id !== id));
-      localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)));
+    const con = confirm("Are you sure you want to delete this password?");
+    if (con) {
+      setpasswordArray(passwordArray.filter((item) => item.id !== id));
+      localStorage.setItem(
+        "passwords",
+        JSON.stringify(passwordArray.filter((item) => item.id !== id))
+      );
       console.log([...passwordArray, form]);
     }
-    toast.success("🦄 Password Deleted !", {
+    toast.success("🦄 Password Deleted!", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -59,14 +72,12 @@ const Manager = () => {
       theme: "dark",
       transition: Bounce,
     });
-    
-  }
+  };
   const editPassword = (id) => {
-    setform(passwordArray.find(item => item.id === id));
-    setpasswordArray(passwordArray.filter(item => item.id !== id));
-    
-  }
-  
+    setform(passwordArray.find((item) => item.id === id));
+    setpasswordArray(passwordArray.filter((item) => item.id !== id));
+  };
+
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: e.target.value });
   };
@@ -118,7 +129,7 @@ const Manager = () => {
               id=""
               className="bg-gray-200 text-black rounded-2xl px-2 py-1 mb-2 w-full"
             />
-            <div className="flex">
+            <div className="flex flex-col md:flex-row gap-2">
               <input
                 value={form.username}
                 onChange={handleChange}
@@ -298,7 +309,8 @@ const Manager = () => {
                       <div className="flex items-center justify-around gap-2">
                         <span>
                           <svg
-                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all " onClick={()=>editPassword(item.id)}
+                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all "
+                            onClick={() => editPassword(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
@@ -323,7 +335,8 @@ const Manager = () => {
                         </span>
                         <span>
                           <svg
-                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all" onClick={()=>deletePassword(item.id)}
+                            className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
+                            onClick={() => deletePassword(item.id)}
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
                             width="24"
