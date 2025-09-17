@@ -48,7 +48,7 @@ const Manager = () => {
       localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item => item.id !== id)));
       console.log([...passwordArray, form]);
     }
-    toast.success("🦄 Password Deleted!", {
+    toast.success("🦄 Password Deleted !", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
