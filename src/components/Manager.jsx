@@ -213,6 +213,7 @@ const Manager = () => {
                         <svg
                           onClick={() =>
                             navigator.clipboard.writeText(item.site)
+                            
                           }
                           className="inline-block cursor-pointer hover:scale-105 hover:transition-all"
                           xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +276,7 @@ const Manager = () => {
                     {/* Password */}
                     <td>
                       <div className="flex items-center justify-between gap-2">
-                        {item.password}
+                        {"*".repeat(item.password.length)}
                         <svg
                           onClick={() =>
                             navigator.clipboard.writeText(item.password)
